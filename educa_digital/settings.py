@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='unsafe-secret-key')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']  # Ajuste conforme necessário
+ALLOWED_HOSTS = ['*'] 
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,8 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     'rest_framework',
-    # Importante: app 'users' está dentro de 'back_sistema_digital/back_sistema_digital'
-    'back_sistema_digital.users',
+    'educa_digital.users',
 ]
 
 MIDDLEWARE = [
@@ -32,13 +31,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'back_sistema_digital.urls'
+ROOT_URLCONF = 'educa_digital.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
-        'APP_DIRS': True,  # Isso deve estar True
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -51,17 +50,17 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'back_sistema_digital.wsgi.application'
+WSGI_APPLICATION = 'educa_digital.wsgi.application'
 
 # Banco de dados PostgreSQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
-        'NAME': config('DB_NAME', default='educa_digital'),
-        'USER': config('DB_USER', default='postgres'),
-        'PASSWORD': config('DB_PASSWORD', default='123'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
     }
 }
 
