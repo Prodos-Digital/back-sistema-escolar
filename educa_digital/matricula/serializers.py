@@ -97,3 +97,10 @@ class EnrollmentSerializer(serializers.ModelSerializer):
             setattr(instance, attr, value)
         instance.save()
         return instance
+
+
+class EnrollmentDocumentsUploadSerializer(serializers.Serializer):
+    cartao_sus = serializers.FileField(required=False, allow_null=True)
+    laudo_pcd = serializers.FileField(required=False, allow_null=True)
+    comprovante_residencia = serializers.FileField(required=True)
+    historico_escolar = serializers.FileField(required=True)

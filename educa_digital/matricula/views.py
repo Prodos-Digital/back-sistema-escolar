@@ -7,7 +7,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 from .models import Enrollment, EnrollmentDocuments
-from .serializers import EnrollmentSerializer, EnrollmentDocumentsSerializer
+from .serializers import EnrollmentSerializer, EnrollmentDocumentsSerializer, EnrollmentDocumentsUploadSerializer
 from django.contrib.auth import get_user_model
 
 
@@ -147,15 +147,7 @@ class EnrollmentDocumentsView(generics.CreateAPIView):
         manual_parameters=[
             openapi.Parameter('enrollment', openapi.IN_FORM, description="ID da matrícula", type=openapi.TYPE_INTEGER)
         ],
-        request_body=openapi.Schema(
-            type=openapi.TYPE_OBJECT,
-            properties={
-                'cartao_sus': openapi.Schema(type=openapi.TYPE_FILE, description="Arquivo do Cartão SUS (opcional)"),
-                'laudo_pcd': openapi.Schema(type=openapi.TYPE_FILE, description="Arquivo do Laudo PCD (opcional)"),
-                'comprovante_residencia': openapi.Schema(type=openapi.TYPE_FILE, description="Arquivo do Comprovante de Residência"),
-                'historico_escolar': openapi.Schema(type=openapi.TYPE_FILE, description="Arquivo do Histórico Escolar"),
-            }
-        ),
+        request_body=EnrollmentDocumentsUploadSerializer,
         responses={201: EnrollmentDocumentsSerializer()}
     )
     def post(self, request, *args, **kwargs):
