@@ -21,6 +21,8 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('educa_digital.users.urls')),
+    path('matricula/', include('educa_digital.matricula.urls')),
+    path('profile/', include('educa_digital.accounts.urls')),
     
     # Endpoints para autenticação JWT
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
